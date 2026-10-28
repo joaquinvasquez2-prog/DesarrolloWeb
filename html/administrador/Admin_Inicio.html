@@ -80,6 +80,40 @@
                 <button type="submit">Registrar</button>
             </form>
         </div>
+        <div class="Creacion">
+                <h2>Editar Usuario</h2>
+                <form action="" id="formeditar">
+                    <div>
+                        <label for="editNombre">Nombre Completo</label>
+                        <input type="text" id="editNombre">
+                    </div>
+                    <div>
+                        <label for="editUsuario">Nombre de Usuario</label>
+                        <input type="text" id="editUsuario">
+                    </div>
+                    <div>
+                        <label for="editpassword">Nueva Contraseña (opcional) </label>
+                        <input type="password" id="editpassword">
+                    </div>
+                    <div>
+                        <label for="editrol">Rol</label>
+                        <select id="editrol">
+                            <option value="Administrador" selected>Administrador</option>
+                            <option value="Encargado">Encargado</option>
+                            <option value="Técnico">Técnico</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="editsucursal">Sucursal</label>
+                        <select id="editsucursal">
+                            <option value="Puente Alto" selected>Puente Alto</option>
+                            <option value="La Florida">La Florida</option>
+                            <option value="Providencia">Providencia</option>
+                        </select>
+                    </div>
+                    <button type="submit">Guardar cambios</button>
+                </form>
+            </div>
     </main>
     <script>
         const botonesEditar = document.querySelectorAll('td button[type="button"]');
