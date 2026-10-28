@@ -23,93 +23,147 @@
           <option value="La Florida">La Florida</option> 
           <option value="Providencia">Providencia</option> 
         </select> 
-        <h3>Sucursal: Puente Alto</h3> 
-        <table> 
-          <tbody> 
-            <tr> 
-              <th>Equipo</th> 
-              <th>Tipo</th> 
-              <th>Estado</th> 
-              <th>Actualizar estado</th> 
-            </tr> 
-            <tr> 
-              <td>Caja 01</td> 
-              <td>Caja</td> 
-              <td>Funcionando</td> 
-              <td> 
-                <select> 
-                  <option>Funcionando</option> 
-                  <option>Con falla</option> 
-                  <option>Fuera de servicio</option> 
-                </select> 
-                <button type="button">Actualizar</button> 
-              </td> 
-            </tr> 
-            <tr> 
-              <td>Caja 02</td> 
-              <td>Caja</td> 
-              <td>Con falla</td> 
-              <td> 
-                <select> 
-                  <option>Funcionando</option> 
-                  <option selected>Con falla</option> 
-                  <option>Fuera de servicio</option> 
-                </select> 
-                <button type="button">Actualizar</button> 
-              </td> 
-            </tr> 
-            <tr> 
-              <td>Balanza 01</td> 
-              <td>Balanza</td> 
-              <td>Funcionando</td> 
-              <td> 
-                <select> 
-                  <option>Funcionando</option> 
-                  <option>Con falla</option> 
-                  <option>Fuera de servicio</option> 
-                </select> <button type="button">Actualizar</button> 
-              </td> 
-            </tr> 
-            <tr> 
-              <td>Balanza 02</td> 
-              <td>Balanza</td> 
-              <td>Fuera de servicio</td> 
-              <td> 
-              <select> 
-                <option>Funcionando</option> 
-                <option>Con falla</option> 
-                <option selected>Fuera de servicio</option> 
-              </select> <button type="button">Actualizar</button> 
-              </td> 
-            </tr> 
-            <tr> 
-              <td>Impresora 01</td> 
-              <td>Impresora</td> 
-              <td>Funcionando</td> 
-              <td> 
-                <select> 
-                  <option>Funcionando</option> 
-                  <option>Con falla</option> 
-                  <option>Fuera de servicio</option> 
-                </select> 
-                <button type="button">Actualizar</button> 
-              </td> 
-            </tr> 
-            <tr> 
-              <td>Impresora 02</td> 
-              <td>Impresora</td> 
-              <td>Funcionando</td> 
-              <td> 
-                <select> 
-                  <option>Funcionando</option> 
-                  <option>Con falla</option> 
-                  <option>Fuera de servicio</option> 
-                </select> 
-                <button type="button">Actualizar</button> 
-              </td> 
-            </tr> 
-          </tbody> 
-        </table> 
+        <h3 id="puente-alto">Equipos de Puente Alto</h3>
+        <table>
+          <thead>
+            <tr><th>Equipo</th><th>Tipo</th><th>Estado</th><th>Actualizar estado</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Caja 01</td>
+              <td>Caja</td>
+              <td>Funcionando</td>
+              <td>
+                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
+                <button type="button">Actualizar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Caja 02</td>
+              <td>Caja</td>
+              <td>Con falla</td>
+              <td>
+                <select><option>Funcionando</option><option selected>Con falla</option><option>Fuera de servicio</option></select>
+                <button type="button">Actualizar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Balanza 01</td>
+              <td>Balanza</td>
+              <td>Funcionando</td>
+              <td>
+                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
+                <button type="button">Actualizar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Balanza 02</td>
+              <td>Balanza</td>
+              <td>Fuera de servicio</td>
+              <td>
+                <select><option>Funcionando</option><option>Con falla</option><option selected>Fuera de servicio</option></select>
+                <button type="button">Actualizar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Impresora 01</td>
+              <td>Impresora</td>
+              <td>Funcionando</td>
+              <td>
+                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
+                <button type="button">Actualizar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Impresora 02</td>
+              <td>Impresora</td>
+              <td>Funcionando</td>
+              <td>
+                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
+                <button type="button">Actualizar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 id="la-florida">Equipos de La Florida</h3>
+        <table>
+          <thead>
+            <tr><th>Equipo</th><th>Tipo</th><th>Estado</th><th>Actualizar estado</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Caja 01</td>
+              <td>Caja</td>
+              <td>Funcionando</td>
+              <td>
+                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
+                <button type="button">Actualizar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Caja 02</td>
+              <td>Caja</td>
+              <td>Con falla</td>
+              <td>
+                <select><option>Funcionando</option><option selected>Con falla</option><option>Fuera de servicio</option></select>
+                <button type="button">Actualizar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Balanza 01</td>
+              <td>Balanza</td>
+              <td>Funcionando</td>
+              <td>
+                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
+                <button type="button">Actualizar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Impresora 01</td>
+              <td>Impresora</td>
+              <td>Con falla</td>
+              <td>
+                <select><option>Funcionando</option><option selected>Con falla</option><option>Fuera de servicio</option></select>
+                <button type="button">Actualizar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 id="providencia">Equipos de Providencia</h3>
+        <table>
+          <thead>
+            <tr><th>Equipo</th><th>Tipo</th><th>Estado</th><th>Actualizar estado</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Caja 01</td>
+              <td>Caja</td>
+              <td>Funcionando</td>
+              <td>
+                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
+                <button type="button">Actualizar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Balanza 01</td>
+              <td>Balanza</td>
+              <td>Funcionando</td>
+              <td>
+                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
+                <button type="button">Actualizar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Impresora 01</td>
+              <td>Impresora</td>
+              <td>Funcionando</td>
+              <td>
+                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
+                <button type="button">Actualizar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </main> 
     </body> 
   </html>
