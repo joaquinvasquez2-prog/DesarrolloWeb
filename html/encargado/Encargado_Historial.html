@@ -19,15 +19,15 @@
             filtrotipo: '',
             filtroestado: '',
             incidencias: [
-            {id: 1,tipo: 'Caja', descripcion: 'No procesa pagos',fechareporte: '2026-10-31',fecharesolucion: '2026-11-1'},            
-            {id: 2,tipo: 'Caja', descripcion: 'xd',fechareporte: '2026-10-25',fecharesolucion: '2026-10-26'},
-            {id: 3,tipo: 'Caja', descripcion: 'sicseven',fechareporte: '2026-10-23',fecharesolucion: null},
-            {id: 4,tipo: 'Impresora', descripcion: 'xd',fechareporte: '2026-10-23',fecharesolucion: '2026-10-24'},
-            {id: 5,tipo: 'Impresora', descripcion: 'xd',fechareporte: '2026-10-24',fecharesolucion: '2026-10-26'},
-            {id: 6,tipo: 'Impresora', descripcion: 'a',fechareporte: '2026-11-1',fecharesolucion: null},
-            {id: 7,tipo: 'Balanza', descripcion: 'e',fechareporte: '2026-11-1',fecharesolucion: '2026-11-2'},
-            {id: 8,tipo: 'Balanza', descripcion: 'quien es json',fechareporte:'2026-11-1',fecharesolucion: null},
-            {id: 9,tipo: 'Balanza', descripcion: 'xd',fechareporte: '2026-11-1',fecharesolucion: null}            
+            {id: 1,equipo: 'Caja 01',tipo: 'Caja', descripcion: 'No procesa pagos',fechareporte: '2026-10-31',fecharesolucion: '2026-11-1'},            
+            {id: 2,equipo: 'Caja 02',tipo: 'Caja', descripcion: 'xd',fechareporte: '2026-10-25',fecharesolucion: '2026-10-26'},
+            {id: 3,equipo: 'Caja 03',tipo: 'Caja', descripcion: 'sicseven',fechareporte: '2026-10-23',fecharesolucion: null},
+            {id: 4,equipo: 'Impresora 01',tipo: 'Impresora', descripcion: 'xd',fechareporte: '2026-10-23',fecharesolucion: '2026-10-24'},
+            {id: 5,equipo: 'Impresora 02',tipo: 'Impresora', descripcion: 'xd',fechareporte: '2026-10-24',fecharesolucion: '2026-10-26'},
+            {id: 6,equipo: 'Impresora 03',tipo: 'Impresora', descripcion: 'a',fechareporte: '2026-11-1',fecharesolucion: null},
+            {id: 7,equipo: 'Balanza 01',tipo: 'Balanza', descripcion: 'e',fechareporte: '2026-11-1',fecharesolucion: '2026-11-2'},
+            {id: 8,equipo: 'Balanza 02',tipo: 'Balanza', descripcion: 'quien es json',fechareporte:'2026-11-1',fecharesolucion: null},
+            {id: 9,equipo: 'Balanza 03',tipo: 'Balanza', descripcion: 'xd',fechareporte: '2026-11-1',fecharesolucion: null}            
             ],
             get nincidencias()
             {
@@ -40,54 +40,60 @@
             get pendientes ()
             {
                 return this.incidencias.filter(i => i.fecharesolucion === null).length;
+            },
+            get filtrados ()
+            {
+                return this.incidencias.filter(i =>
+                (this.filtrotipo === '' || i.tipo === this.filtrotipo) &&
+                (this.filtroestado === '' || this.estado(i) === this.filtroestado)
+                );   
+            },
+            estado(i) {
+                if (i.fecharesolucion === null)
+                {
+                    return 'Pendiente';
+                }
+                return 'Resuelta';
             }
         }">
+        <!--FALTA ORDENARPORFECHAFALTA ORDENARPORFECHAFALTA ORDENARPORFECHAFALTA ORDENARPORFECHAFALTA ORDENARPORFECHAFALTA ORDENARPORFECHAFALTA ORDENARPORFECHAFALTA ORDENARPORFECHA -->
             <ul>
                 <li>Total incidencias: <div x-text="nincidencias"></div></li>
                 <li>Resueltas: <div x-text="resueltas"></div></li>
                 <li>Pendientes: <div x-text="pendientes"></div></li>
             </ul>
+        <select x-model="filtrotipo">
+            <option value="">Todos</option>
+            <option>Caja</option>
+            <option>Balanza</option>
+            <option>Impresora</option>
+        </select>
+        <select x-model="filtroestado">
+        <option value="">Todos</option>
+            <option>Resuelta</option>
+            <option>Pendiente</option>
+        </select>
         <table>
     <thead>
         <tr>
+            <th>Tipo</th>
             <th>Equipo</th>
             <th>Incidencia Reportada</th>
             <th>Fecha reporte</th>
             <th>Fecha resolucion</th>
-            <th>Estado</th>
         </tr>
     </thead>
-        <tr>
-            <td>Balanza 02</td>
-            <td>No enciende</td>
-            <td>09 Septiembre, 16:40</td>
-            <td>09 Septiembre, 18:40</td>
-            <td>Resuelto</td>
-        </tr>
-
-        <tr>
-            <td>Caja 01</td>
-            <td>No procesa Pagos</td>
-            <td>10 Septiembre, 16:40</td>
-            <td>10 Septiembre, 18:40</td>
-            <td>Resuelto</td>
-        </tr>
-
-        <tr>
-            <td>Impresora 02</td>
-            <td>Agotamiento de tinta</td>
-            <td>11 Septiembre, 13:53</td>
-            <td>11 Septiembre, 14:20</td>
-            <td>Resuelto</td>
-        </tr>
-
-        <tr>
-            <td>Caja 02</td>
-            <td>No enciende</td>
-            <td>12 Septiembre, 16:40</td>
-            <td></td>
-            <td>Pendiente</td>
-        </tr>
+        <tbody>
+            <template x-for="i in filtrados">
+                <tr>
+                    <td x-text ="i.tipo"></td>
+                    <td x-text="i.equipo"></td>
+                    <td x-text ="i.descripcion"></td>
+                    <td x-text ="i.fechareporte"></td>
+                    <td x-text ="i.fecharesolucion"></td>
+                </tr>
+            </template>
+        </tbody>
         </table> 
         </div>
     </body>
