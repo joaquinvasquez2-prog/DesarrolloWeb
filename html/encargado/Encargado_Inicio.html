@@ -2,6 +2,7 @@
 <html lang="es">
     <head>
         <title>Encargado Inicio</title>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../css/encargado.css">
@@ -14,47 +15,21 @@
             <a href="Encargado_Historial.html">Historial de incidencias</a>
             <a href="../Login.html">Cerrar Sesion</a>
         </header>
-        <div class="contenido">
-            <h1>Equipo de la sucursal</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Equipo</th>
-                        <th>Tipo</th>
-                        <th>Estado</th>
-                    </tr>
-                    <tr>
-                        <td>Caja 01</td>
-                        <td>Caja</td>
-                        <td>Funcionando</td>
-                    </tr>
-                    <tr>
-                        <td>Caja 02</td>
-                        <td>Caja</td>
-                        <td>Fuera de servicio</td>
-                    </tr>
-                    <tr>
-                        <td>Balanza 01</td>
-                        <td>Balanza</td>
-                        <td>Funcionando</td>
-                    </tr>
-                    <tr>
-                        <td>Balanza 02</td>
-                        <td>Balanza</td>
-                        <td>Funcionando</td>
-                    </tr>
-                    <tr>
-                        <td>Impresora 01</td>
-                        <td>Impresora</td>
-                        <td>Funcionando</td>
-                    </tr>
-                    <tr>
-                        <td>Impresora 02</td>
-                        <td>Impresora</td>
-                        <td>Funcionando</td>
-                    </tr>
-                </thead>
-            </table>
+        <div class ="contenido" x-data ="{
+            equipos: [
+            { id: 1, nombre: 'Caja 01', tipo: 'Caja', estado: 'Funcionando' }
+            { id: 2, nombre: 'Caja 02', tipo: 'Caja', estado: 'Fuera de servicio' }
+            { id: 3, nombre: 'Caja 03', tipo: 'Caja', estado: 'Funcionando' }
+            { id: 4, nombre: 'Impresora 01', tipo: 'Impresora', estado: 'Funcionando' }
+            { id: 5, nombre: 'Impresora 02', tipo: 'Impresora', estado: 'Funcionando' }
+            { id: 6, nombre: 'Impresora 03', tipo: 'Impresora', estado: 'Funcionando' }
+            { id: 7, nombre: 'Balanza 01', tipo: 'Balanza', estado: 'Con falla' }
+            { id: 8, nombre: 'Balanza 02', tipo: 'Balanza', estado: 'Funcionando' }
+            { id: 9, nombre: 'Balanza 03', tipo: 'Balanza', estado: 'Funcionando' }
+            ],
+        }">
+        <h1>Equipos de la sucursal</h1>
+
         </div>
     </body>
 </html>
