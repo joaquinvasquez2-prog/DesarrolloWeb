@@ -16,20 +16,69 @@
             <a href="../Login.html">Cerrar Sesion</a>
         </header>
         <div class ="contenido" x-data ="{
+            filtrotipo: '',
+            filtroestado: '',
             equipos: [
-            { id: 1, nombre: 'Caja 01', tipo: 'Caja', estado: 'Funcionando' }
-            { id: 2, nombre: 'Caja 02', tipo: 'Caja', estado: 'Fuera de servicio' }
-            { id: 3, nombre: 'Caja 03', tipo: 'Caja', estado: 'Funcionando' }
-            { id: 4, nombre: 'Impresora 01', tipo: 'Impresora', estado: 'Funcionando' }
-            { id: 5, nombre: 'Impresora 02', tipo: 'Impresora', estado: 'Funcionando' }
-            { id: 6, nombre: 'Impresora 03', tipo: 'Impresora', estado: 'Funcionando' }
-            { id: 7, nombre: 'Balanza 01', tipo: 'Balanza', estado: 'Con falla' }
-            { id: 8, nombre: 'Balanza 02', tipo: 'Balanza', estado: 'Funcionando' }
-            { id: 9, nombre: 'Balanza 03', tipo: 'Balanza', estado: 'Funcionando' }
+            { id: 1, nombre: 'Caja 01', tipo: 'Caja', estado: 'Funcionando' },
+            { id: 2, nombre: 'Caja 02', tipo: 'Caja', estado: 'Fuera de servicio' },
+            { id: 3, nombre: 'Caja 03', tipo: 'Caja', estado: 'Funcionando' },
+            { id: 4, nombre: 'Impresora 01', tipo: 'Impresora', estado: 'Funcionando' },
+            { id: 5, nombre: 'Impresora 02', tipo: 'Impresora', estado: 'Funcionando' },
+            { id: 6, nombre: 'Impresora 03', tipo: 'Impresora', estado: 'Funcionando' },
+            { id: 7, nombre: 'Balanza 01', tipo: 'Balanza', estado: 'Con falla' },
+            { id: 8, nombre: 'Balanza 02', tipo: 'Balanza', estado: 'Funcionando' },
+            { id: 9, nombre: 'Balanza 03', tipo: 'Balanza', estado: 'Funcionando' },
             ],
+            get filtrados ()
+            {
+                return this.equipos.filter(filtro =>
+                (this.filtrotipo === '' || filtro.tipo === this.filtrotipo) &&
+                (this.filtroestado === '' || filtro.estado === this.filtroestado)
+                );
+                
+            }
         }">
         <h1>Equipos de la sucursal</h1>
-
+        <select x-model="filtrotipo">
+            <option value="">Todos</option>
+            <option>Caja</option>
+            <option>Balanza</option>
+            <option>Impresora</option>
+        </select>
+        <select x-model="filtroestado">
+        <option value="">Todos los estados</option>
+            <option>Funcionando</option>
+            <option>Con falla</option>
+            <option>Fuera de servicio</option>
+        </select>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Equipo
+                    </th>
+                    <Th>
+                        Tipo
+                    </Th>
+                    <th>
+                        Estado
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template x-for="filtro in filtrados">
+                    <tr>
+                        <td x-text ="filtro.nombre">  
+                        </td>
+                        <td x-text ="filtro.tipo">  
+                        </td>
+                        <td x-text ="filtro.estado">  
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <div x-show="filtrados.length === 0">No hay equipos </div>
         </div>
     </body>
 </html>
