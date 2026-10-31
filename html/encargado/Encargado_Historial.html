@@ -15,13 +15,38 @@
             <a href="Encargado_Historial.html">Historial de incidencias</a>
             <a href="../Login.html">Cerrar Sesion</a>
         </header>
-        <div class="contenido">
+        <div class="contenido" x-data="{
+            filtrotipo: '',
+            filtroestado: '',
+            incidencias: [
+            {id: 1,tipo: 'Caja', descripcion: 'No procesa pagos',fechareporte: '2026-10-31',fecharesolucion: '2026-11-1'},            
+            {id: 2,tipo: 'Caja', descripcion: 'xd',fechareporte: '2026-10-25',fecharesolucion: '2026-10-26'},
+            {id: 3,tipo: 'Caja', descripcion: 'sicseven',fechareporte: '2026-10-23',fecharesolucion: null},
+            {id: 4,tipo: 'Impresora', descripcion: 'xd',fechareporte: '2026-10-23',fecharesolucion: '2026-10-24'},
+            {id: 5,tipo: 'Impresora', descripcion: 'xd',fechareporte: '2026-10-24',fecharesolucion: '2026-10-26'},
+            {id: 6,tipo: 'Impresora', descripcion: 'a',fechareporte: '2026-11-1',fecharesolucion: null},
+            {id: 7,tipo: 'Balanza', descripcion: 'e',fechareporte: '2026-11-1',fecharesolucion: '2026-11-2'},
+            {id: 8,tipo: 'Balanza', descripcion: 'quien es json',fechareporte:'2026-11-1',fecharesolucion: null},
+            {id: 9,tipo: 'Balanza', descripcion: 'xd',fechareporte: '2026-11-1',fecharesolucion: null}            
+            ],
+            get nincidencias()
+            {
+                return this.incidencias.length;
+            },
+            get resueltas ()
+            {
+                return this.incidencias.filter(i => i.fecharesolucion !== null).length;
+            },
+            get pendientes ()
+            {
+                return this.incidencias.filter(i => i.fecharesolucion === null).length;
+            }
+        }">
             <ul>
-                <li>Numero de incidencias 4</li>
-                <li>Resueltas 3</li>
-                <li>Pendientes 1</li>
+                <li>Total incidencias: <div x-text="nincidencias"></div></li>
+                <li>Resueltas: <div x-text="resueltas"></div></li>
+                <li>Pendientes: <div x-text="pendientes"></div></li>
             </ul>
-
         <table>
     <thead>
         <tr>
