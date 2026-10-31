@@ -15,7 +15,31 @@
         <a href="Tecnico_Historial.html">Historial de incidencias</a> 
         <a href="../Login.html">Cerrar Sesion</a> 
       </header> 
-      <main class="ContenidoPrincipal"> 
+      <main class="ContenidoPrincipal" x-data="{
+        sucursales:[
+        {id: 0, nombre: ''},        
+        {id: 0, nombre: ''},
+        {id: 0, nombre: ''}        
+        ],
+        equipos: [
+        { id: 1,  sucursal: 'Puente Alto', nombre: 'Caja 01',      tipo: 'Caja',      estado: 'Funcionando' },
+        { id: 2,  sucursal: 'Puente Alto', nombre: 'Caja 02',      tipo: 'Caja',      estado: 'Fuera de servicio' },
+        { id: 3,  sucursal: 'Puente Alto', nombre: 'Caja 03',      tipo: 'Caja',      estado: 'Funcionando' },
+        { id: 4,  sucursal: 'Puente Alto', nombre: 'Impresora 01', tipo: 'Impresora', estado: 'Funcionando' },
+        { id: 5,  sucursal: 'Puente Alto', nombre: 'Impresora 02', tipo: 'Impresora', estado: 'Funcionando' },
+        { id: 6,  sucursal: 'Puente Alto', nombre: 'Impresora 03', tipo: 'Impresora', estado: 'Con falla' },
+        { id: 7,  sucursal: 'Puente Alto', nombre: 'Balanza 01',   tipo: 'Balanza',   estado: 'Con falla' },
+        { id: 8,  sucursal: 'Puente Alto', nombre: 'Balanza 02',   tipo: 'Balanza',   estado: 'Funcionando' },
+        { id: 9,  sucursal: 'Puente Alto', nombre: 'Balanza 03',   tipo: 'Balanza',   estado: 'Funcionando' },
+        { id: 10, sucursal: 'La Florida',  nombre: 'Caja 01',      tipo: 'Caja',      estado: 'Funcionando' },
+        { id: 11, sucursal: 'La Florida',  nombre: 'Caja 02',      tipo: 'Caja',      estado: 'Con falla' },
+        { id: 12, sucursal: 'La Florida',  nombre: 'Balanza 01',   tipo: 'Balanza',   estado: 'Funcionando' },
+        { id: 13, sucursal: 'La Florida',  nombre: 'Impresora 01', tipo: 'Impresora', estado: 'Con falla' },
+        { id: 14, sucursal: 'Providencia', nombre: 'Caja 01',      tipo: 'Caja',      estado: 'Funcionando' },
+        { id: 15, sucursal: 'Providencia', nombre: 'Balanza 01',   tipo: 'Balanza',   estado: 'Funcionando' },
+        { id: 16, sucursal: 'Providencia', nombre: 'Impresora 01', tipo: 'Impresora', estado: 'Funcionando' }
+        ],
+      }"> 
         <h2>Detalle de sucursal</h2> 
         <label for="Sucursal">Seleccionar Sucursal</label> 
         <select id="Sucursal"> 
