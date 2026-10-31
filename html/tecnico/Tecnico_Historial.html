@@ -30,39 +30,64 @@
       ],
       get nincidencias()
             {
-                return this.historial.length;
+                return this.filtrados.length;
             },
             get resueltas ()
             {
-                return this.historial.filter(i => i.fecharesolucion !== null).length;
+                return this.filtrados.filter(i => i.fecharesolucion !== null).length;
             },
             get pendientes ()
             {
-                return this.historial.filter(i => i.fecharesolucion === null).length;
+                return this.filtrados.filter(i => i.fecharesolucion === null).length;
             },
+            estado(i) {
+                if (i.fecharesolucion === null)
+                {
+                    return 'Pendiente';
+                }
+                return 'Resuelta';
+            },
+            get filtrados() {
+              return this.historial.filter(i =>
+              this.filtrosucursal === '' || i.sucursal === this.filtrosucursal
+            );
+            }
     }">
     <h2>Historial de fallas por sucursal</h2>
     <label for="Sucursal">Seleccionar Sucursal</label>
-    <select id="Sucursal">
+    <select id="Sucursal" x-model="filtrosucursal">
       <option value="">Todas</option>
       <option value="Puente Alto">Puente Alto</option>
       <option value="La Florida">La Florida</option>
       <option value="Providencia">Providencia</option>
     </select>
+    <h3>Total incidencias: <div x-text="nincidencias"></div></h3>
+    <h3>Resueltas: <div x-text="resueltas"></div></h3>
+    <h3>Pendientes: <div x-text="pendientes"></div></h3>
     <table>
-      <thead>
+    <thead>
+      <tr>
+        <th>Sucursal</th>
+        <th>Equipo</th>
+        <th>Incidencia</th>
+        <th>Fecha Reporte</th>
+        <th>Fecha Resolución</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <template x-for="i in filtrados">
         <tr>
-          <th>Sucursal</th>
-          <th>Equipo</th>
-          <th>Incidencia</th>
-          <th>Fecha Reporte</th>
-          <th>Fecha Resolucion</th>
-          <th>Estado</th>
+          <td x-text="i.sucursal"></td>
+          <td x-text="i.equipo"></td>
+          <td x-text="i.descripcion"></td>
+          <td x-text="i.fechareporte"></td>
+          <td x-text="i.fecharesolucion"></td>
+          <td x-text="estado(i)"></td>
         </tr>
-      </thead>
+      </template>
+    </tbody>
     </table>
-    
-    
     </main>
   </body>
 </html>
