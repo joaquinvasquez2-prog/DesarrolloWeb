@@ -16,10 +16,11 @@
         <a href="../Login.html">Cerrar Sesion</a> 
       </header> 
       <main class="ContenidoPrincipal" x-data="{
+        sucursalseleccion: '',
         sucursales:[
-        {id: 0, nombre: ''},        
-        {id: 0, nombre: ''},
-        {id: 0, nombre: ''}        
+        {id: 1, nombre: 'Puente Alto'},        
+        {id: 2, nombre: 'Providencia'},
+        {id: 3, nombre: 'La Florida'}        
         ],
         equipos: [
         { id: 1,  sucursal: 'Puente Alto', nombre: 'Caja 01',      tipo: 'Caja',      estado: 'Funcionando' },
@@ -39,156 +40,69 @@
         { id: 15, sucursal: 'Providencia', nombre: 'Balanza 01',   tipo: 'Balanza',   estado: 'Funcionando' },
         { id: 16, sucursal: 'Providencia', nombre: 'Impresora 01', tipo: 'Impresora', estado: 'Funcionando' }
         ],
-      }"> 
-        <h2>Detalle de sucursal</h2> 
-        <label for="Sucursal">Seleccionar Sucursal</label> 
-        <select id="Sucursal"> 
-          <option value="">Seleccionar</option> 
-          <option value="Puente Alto">Puente Alto</option> 
-          <option value="La Florida">La Florida</option> 
-          <option value="Providencia">Providencia</option> 
-        </select> 
-        <h3 id="puente-alto">Equipos de Puente Alto</h3>
+        get equipossucursal() {
+          return this.equipos.filter(i => i.sucursal === this.sucursalseleccion);
+        },
+        incidencias(nombre) {
+          return this.equipos.filter(i => i.sucursal === nombre && i.estado !== 'Funcionando').length;
+        },
+        gravedad(nombre){
+          const n = this.incidencias(nombre);
+          if (n == 0) return 'Normal';
+          if (n <= 2) return 'Media';
+          return 'Grave';
+        }
+      }">
+      <h3>Sucursales</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Sucursal</th>
+            <th>Equipos con incidencias</th>
+            <th>Gravedad</th>
+            <th>Ver equipo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template x-for="y in sucursales">
+            <tr>
+              <td x-text="y.nombre"></td>
+              <td x-text="incidencias(y.nombre)"></td>
+              <td x-text="gravedad(y.nombre)"></td>
+              <td><button type="button" @click="sucursalseleccion = y.nombre">Ver equipos</button></td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+      <div x-show="sucursalseleccion !== ''">
+        <h3>Equipos de <div x-text="sucursalseleccion"></div></h3>
         <table>
           <thead>
-            <tr><th>Equipo</th><th>Tipo</th><th>Estado</th><th>Actualizar estado</th></tr>
+            <tr>
+              <th>Equipo</th>
+              <th>Tipo</th>
+              <th>Estado</th>
+              <th>Actualizar estado</th>
+            </tr>
           </thead>
           <tbody>
+            <template x-for="z in equipossucursal">
             <tr>
-              <td>Caja 01</td>
-              <td>Caja</td>
-              <td>Funcionando</td>
+              <td x-text="z.nombre"></td>
+              <td x-text="z.tipo"></td>
+              <td x-text="z.estado"></td>
               <td>
-                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
-                <button type="button">Actualizar</button>
+                <select x-model="z.estado">
+                  <option>Funcionando</option>
+                  <option>Con falla</option>
+                  <option>Fuera de servicio</option>
+                </select>
               </td>
             </tr>
-            <tr>
-              <td>Caja 02</td>
-              <td>Caja</td>
-              <td>Con falla</td>
-              <td>
-                <select><option>Funcionando</option><option selected>Con falla</option><option>Fuera de servicio</option></select>
-                <button type="button">Actualizar</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Balanza 01</td>
-              <td>Balanza</td>
-              <td>Funcionando</td>
-              <td>
-                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
-                <button type="button">Actualizar</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Balanza 02</td>
-              <td>Balanza</td>
-              <td>Fuera de servicio</td>
-              <td>
-                <select><option>Funcionando</option><option>Con falla</option><option selected>Fuera de servicio</option></select>
-                <button type="button">Actualizar</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Impresora 01</td>
-              <td>Impresora</td>
-              <td>Funcionando</td>
-              <td>
-                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
-                <button type="button">Actualizar</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Impresora 02</td>
-              <td>Impresora</td>
-              <td>Funcionando</td>
-              <td>
-                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
-                <button type="button">Actualizar</button>
-              </td>
-            </tr>
+            </template>
           </tbody>
         </table>
-        <h3 id="la-florida">Equipos de La Florida</h3>
-        <table>
-          <thead>
-            <tr><th>Equipo</th><th>Tipo</th><th>Estado</th><th>Actualizar estado</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Caja 01</td>
-              <td>Caja</td>
-              <td>Funcionando</td>
-              <td>
-                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
-                <button type="button">Actualizar</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Caja 02</td>
-              <td>Caja</td>
-              <td>Con falla</td>
-              <td>
-                <select><option>Funcionando</option><option selected>Con falla</option><option>Fuera de servicio</option></select>
-                <button type="button">Actualizar</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Balanza 01</td>
-              <td>Balanza</td>
-              <td>Funcionando</td>
-              <td>
-                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
-                <button type="button">Actualizar</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Impresora 01</td>
-              <td>Impresora</td>
-              <td>Con falla</td>
-              <td>
-                <select><option>Funcionando</option><option selected>Con falla</option><option>Fuera de servicio</option></select>
-                <button type="button">Actualizar</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 id="providencia">Equipos de Providencia</h3>
-        <table>
-          <thead>
-            <tr><th>Equipo</th><th>Tipo</th><th>Estado</th><th>Actualizar estado</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Caja 01</td>
-              <td>Caja</td>
-              <td>Funcionando</td>
-              <td>
-                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
-                <button type="button">Actualizar</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Balanza 01</td>
-              <td>Balanza</td>
-              <td>Funcionando</td>
-              <td>
-                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
-                <button type="button">Actualizar</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Impresora 01</td>
-              <td>Impresora</td>
-              <td>Funcionando</td>
-              <td>
-                <select><option selected>Funcionando</option><option>Con falla</option><option>Fuera de servicio</option></select>
-                <button type="button">Actualizar</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      </div>
       </main> 
     </body> 
   </html>
