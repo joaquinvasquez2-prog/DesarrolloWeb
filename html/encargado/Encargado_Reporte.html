@@ -16,22 +16,44 @@
             <a href="../Login.html">Cerrar Sesion</a>
         </header>
         
-        <form class="reporte" action="" id="formReporte">
+        <form class="reporte" action="" id="formReporte" x-data="{
+            equipo: '',
+            descripcion: '',
+            error: {
+                equipo: '',
+                descripcion: ''
+            },
+            validarform()
+            {
+                this.error.equipo = '';
+                this.error.descripcion = '';
+                if(this.equipo === '') {
+                    this.error.equipo = 'seleccione un equipo';
+                }
+                if(this.descripcion === '') {
+                    this.error.descripcion = 'Ingrese una descripcion ';
+                }
+            } 
+            
+        }"
+        @submit.prevent="validarform()">
             <h3>Reportar Falla</h3>
         <div>
         <label for="Equipo Falla">Seleccionar Equipo</label>
-        <select id="Equipo Falla">
+        <select id="Equipo Falla" x-model="equipo">
             <option value="">Seleccionar</option>
             <option value="Caja">Caja</option>
             <option value="Balanza">Balanza</option>
             <option value="Impresora">Impresora</option>
         </select>
+        <div class="falta" x-show="error.equipo" x-text="error.equipo"></div>
         </div>
         <div>
         <label for="Reporte">Descripcion del reporte</label>
         </div>
         <div>
-            <textarea name="Reporte" id="Reporte"></textarea>
+            <textarea name="Reporte" id="Reporte" x-model="descripcion"></textarea>
+            <div class="falta" x-show="error.descripcion" x-text="error.descripcion"></div>
         </div>
         <button type="submit">Registrar incidencia</button>
         </form>
