@@ -13,40 +13,80 @@
         <a href="Admin_Inicio.html">Inicio</a>
         <a href="../Login.html">Cerrar Sesión</a>
         </header>
-        <div class="TablaAdmin">
-            <table>
-                <tr>
-                    <th>Sucursal</th>
-                    <th>Nombre</th>
-                    <th>Rol</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>Puente Alto</td>
-                    <td>Juan</td>
-                    <td>Administrador</td>
-                    <td>
-                        <button type="button">Editar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>La Florida</td>
-                    <td>Roberto</td>
-                    <td>Tecnico</td>
-                    <td>
-                        <button type="button">Editar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Providencia</td>
-                    <td>Benjamin</td>
-                    <td>Encargado</td>
-                    <td>
-                        <button type="button">Editar</button>
-                    </td>
-                </tr>
-            </table>
+        <div class="TablaAdmin" x-data="{
+            rolfiltro: '',
+            sucursalfiltro: '',
+            usuarios: [
+                { nombre: 'Juan', usuario: 'juan01', rol: 'Administrador', sucursal: 'Puente Alto' },
+                { nombre: 'Roberto', usuario: 'roberto01', rol: 'Tecnico', sucursal: 'La Florida' },
+                { nombre: 'Benjamin', usuario: 'benjamin01', rol: 'Encargado', sucursal: 'Providencia' }
+            ],
+            get filtrados() {
+                return this.usuarios.filter (i =>
+                (this.rolfiltro === '' || i.rol === this.rolfiltro) &&
+                (this.sucursalfiltro === '' || i.sucursal === this.sucursalfiltro)
+                );
+            }
+        }">
+        <div class ="filtros">
+            <select x-model="rolfiltro">
+                <option value="">Todos los roles</option>
+                <option value="Administrador">Administrador</option>
+                <option value="Tecnico">Tecnico</option>
+                <option value="Encargado">Encargado</option>
+            </select>
+            <select x-model ="sucursalfiltro">
+                <option value="">Todas las Sucursales</option>
+                <option value="Puente Alto">Puente Alto</option>
+                <option value="La Florida">La Florida</option>
+                <option value="Providencia">Providencia</option>
+            </select>
         </div>
+        <table>
+            <tr>
+                <th>Sucursal</th>
+                <th>Nombre</th>
+                <th>Usuario</th>
+                <th>Rol</th>
+                <th></th>
+            </tr>
+            <template x-for="i in filtrados">
+                <tr>
+                    <td x-text="i.sucursal"></td>
+                    <td x-text="i.nombre"></td>
+                    <td x-text="i.usuario"></td>
+                    <td x-text="i.rol"></td>
+                    <td><button type="button">Editar</button></td>
+                    <td><button type="button">Eliminar</button></td>
+                </tr>
+            </template>
+        </table>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="Creacion">
             <h2>Nuevo Usuario</h2>
             <form action="" id="formnuevo">
@@ -81,6 +121,47 @@
                 <button type="submit">Registrar</button>
             </form>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         <div class="Creacion">
                 <h2>Editar Usuario</h2>
                 <form action="" id="formeditar">
