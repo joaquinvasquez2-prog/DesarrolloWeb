@@ -89,34 +89,77 @@
 
         <div class="Creacion">
             <h2>Nuevo Usuario</h2>
-            <form action="" id="formnuevo">
+            <form action="" id="formnuevo" x-data="{
+                nombre: '', usuario: '', password: '', rol: '', sucursal: '',
+                error: {
+                    nombre: '',
+                    usuario: '',
+                    password: '',
+                    rol: '',
+                    sucursal: ''
+                },
+                validarform(){
+                    this.error.nombre = '';
+                    this.error.usuario = '';
+                    this.error.password = '';
+                    this.error.rol = '';
+                    this.error.sucursal = '';
+                    if(this.nombre === '')
+                    {
+                        this.error.nombre = 'Ingrese el nombre completo';
+                    }
+                    if(this.usuario === '')
+                    {
+                        this.error.usuario = 'Ingrese el nombre de usuario';
+                    }
+                    if(this.password === '')
+                    {
+                        this.error.password = 'Ingrese la contraseña';
+                    }
+                    if(this.rol === '')
+                    {
+                        this.error.rol = 'Ingrese el rol';
+                    }
+                    if(this.rol === '')
+                    {
+                        this.error.sucursal = 'Ingrese la sucursal';
+                    }
+                }
+            }" @submit.prevent="validarform">
                 <div>
-                    <label for="">Nombre Completo</label>
-                    <input type="text" id="nombre">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" x-model="nombre">
+                    <div class="falta" x-show="error.nombre" x-text="error.nombre"></div>
                 </div>
                 <div>
-                    <label for="">Nombre de Usuario</label>
-                    <input type="text" id="usuario">
+                    <label for="usuario">Nombre de Usuario</label>
+                    <input type="text" id="usuario" x-model="usuario">
+                    <div class="falta" x-show="error.usuario" x-text="error.usuario"></div>
                 </div>
                 <div>
-                    <label for="">Contraseña</label>
-                    <input type="password" id="contraseña">
+                    <label for="contraseña">Contraseña</label>
+                    <input type="password" id="contraseña" x-model="password">
+                    <div class="falta" x-show="error.password" x-text="error.password"></div>
                 </div>
                 <div>
-                    Seleccionar Rol
-                    <select name="rol" id="rol">
-                    <option value="Admin">Administrador</option>
-                    <option value="Encargado">Encargado</option>
-                    <option value="Tecnico">Tecnico</option>
+                    <label for="rol">Seleccionar Rol</label>
+                    <select name="rol" id="rol" x-model="rol">
+                        <option value="">Seleccionar</option>
+                        <option value="Admin">Administrador</option>
+                        <option value="Encargado">Encargado</option>
+                        <option value="Tecnico">Tecnico</option>
                     </select>
+                <div class="falta" x-show="error.rol" x-text="error.rol"></div>
                 </div>
                 <div>
-                    Sucursal
-                    <select name="sucursal" id="sucursal">
-                    <option value="Admin">Puente Alto</option>
-                    <option value="Encargado">La florida</option>
-                    <option value="Tecnico">Providencia</option>
+                    <label for="sucursal">Sucursal</label>
+                    <select name="sucursal" id="sucursal" x-model="sucursal">
+                        <option value="">Seleccionar</option>
+                        <option value="Puente Alto">Puente Alto</option>
+                        <option value="La Florida">La Florida</option>
+                        <option value="Providencia">Providencia</option>
                     </select>
+                <div class="falta" x-show="error.sucursal" x-text="error.sucursal"></div>
                 </div>
                 <button type="submit">Registrar</button>
             </form>
@@ -206,17 +249,6 @@
         confirm(`¿Editar al usuario ${nombreUsuario}?`);
         })  
     })
-    </script>
-    <script>
-        document.getElementById("formnuevo").addEventListener("submit", function(evento) {
-            const usu = document.getElementById("usuario").value.trim();
-            const pas = document.getElementById("contraseña").value.trim();
-            const nom = document.getElementById("nombre").value.trim();
-            if (usu === "" || pas === "" || nom == ""){
-            evento.preventDefault();
-            alert("Complete todos los campos para poder continuar");                          
-            }
-            });
     </script>
     </body>
 </html>
