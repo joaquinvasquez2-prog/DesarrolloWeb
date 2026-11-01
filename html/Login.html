@@ -6,6 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../css/login.css">
+        <link rel="manifest" href="../manifest.json">
     </head>
     <body class="Login">
         <h1 class ="TituloPrincipal">
@@ -31,18 +32,5 @@
             <a href="tecnico/Tecnico_inicio.html" class="boton-demo">Ingresar como Tecnico</a>
             <a href="administrador/Admin_Inicio.html" class="boton-demo">Ingresar como Admin</a>
         </div>
-
-            <script>
-                document.getElementById("formLogin").addEventListener("submit", function(evento) {
-                const usuario = document.getElementById("usuario").value.trim();
-                const password = document.getElementById("password").value.trim();
-                if (usuario === "" || password === "") 
-                {
-                evento.preventDefault();
-                alert("Complete todos los campos para poder continuar");                          
-                }
-                });
-            </script>
     </body>
-
 </html>
