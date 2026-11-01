@@ -12,19 +12,41 @@
         <h1 class ="TituloPrincipal">
             Bienvenido a MarketOps
         </h1>
-        <form action="" id="formLogin">
-            <h2>
-            Iniciar Sesion
-            </h2>
-            <div>
-            <label for="usuario"> Usuario</label>
-            <input type="text" id="usuario" name="Usuario">
-            </div>
-            <div>
+        <form id="formLogin" x-data="
+        {
+            usuario: '',
+            password:  '',
+            error: {
+                usuario: '',
+                password: '',
+            },
+            validarform()
+            {
+                this.error.usuario = '';
+                this.error.password = '';
+                if (this.usuario === '')
+                {
+                    this.error.usuario = 'Ingrese el usuario';
+                }
+                if (this.password === '')
+                {
+                    this.error.password = 'Ingrese el contraseña';
+                }
+            }
+        }"
+        @submit.prevent="validarform">
+        <div>
+            <label for="usuario">Usuario</label>
+            <input type="text" id="usuario" x-model="usuario">
+        </div>
+        <div class="falta" x-show="error.usuario" x-text="error.usuario">
+        </div>
+        <div>
             <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password">
-            </div>
-            <button type="submit">Ingresar</button>
+            <input type="password" id="password" x-model="password">
+        </div>
+        <div class="falta" x-show="error.password" x-text="error.password"></div>
+        <button type="submit">Ingresar</button>
         </form>
         </div>
         <div>
